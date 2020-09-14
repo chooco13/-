@@ -1,0 +1,31 @@
+{
+  "name": "huihui20-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "8.9.4",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^1.1.1",
+    "@line/bot-sdk": "^7.0.0",
+    "axios": "^0.18.1",
+    "cheerio": "^1.0.0-rc.1",
+    "express": "^4.17.1",
+    "firebase": "^4.1.2",
+    "firebase-admin": "^5.0.0",
+    "iconv": "^2.2.3",
+    "moment": "^2.27.0",
+    "node-cron": "^1.2.1",
+    "node-telegram-bot-api": "^0.30.0",
+    "promise": "^7.1.1",
+    "request": "^2.81.0",
+    "tmi.js": "^1.5.0"
+  }
+}

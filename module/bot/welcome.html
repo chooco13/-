@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/resources/css/animate.css">
+
+        <style>
+            @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+            html, body {
+                background: transparent;
+                font-family: "Noto Sans KR", sans-serif;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            h1 {
+                text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000, 0 0 4px #000, 0 0 5px #000;
+                text-align: center;
+                font-size: 64px;
+                color: rgb(255, 255, 255);
+                font-weight: 800;
+                margin: 0;
+            }
+
+            h1 .nickname {
+                display: inline-block;
+                color: #32C3A6;
+            }
+
+            iframe {
+                border: 0;
+                opacity: 0;
+            }
+        </style>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+
+        <script>
+            var queue = [];
+            var isFirst = true;
+            var isPlaying = false;
+
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "",
+                authDomain: "",
+                databaseURL: "",
+                projectId: "",
+                storageBucket: "",
+                messagingSenderId: "",
+                appId: ""
+            };
+            
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            var database = firebase.database();
+
+            database.ref('/tmi/viewers/').orderByChild('createdAt').limitToLast(1).on('child_added', function(data) {
+                queue.push(data.val().display_name);
+            });
+
+            setInterval(function() {
+                if (!isPlaying && queue.length > 0) {
+                    animate(queue.shift());
+                }
+            }, 1000);
+
+            function animate(id) {
+                isPlaying = true;
+
+                var array = [...id];
+                var nickname = $('.nickname');
+                nickname.empty();
+                array.forEach(function(char) {
+                    nickname.append(`<span class="animated wiggle">${char}</span>`);
+                })
+
+                document.getElementById('iframe').contentWindow.postMessage('audio', '*');
+                $('body').removeClass('hide').addClass('fadeIn');
+                setTimeout(function() {
+                    $('body').removeClass('fadeIn').addClass('fadeOut');
+                    setTimeout(function() {
+                        $('body').removeClass('fadeOut').addClass('hide');
+                        isPlaying = false;
+                    }, 1000);
+                }, 7000);
+            }
+        </script>
+    </head>
+    <body class="hide">
+        <div class="text-center">
+            <img src="/resources/img/welcome.png">
+            <div>
+                <h1>어서와 여기는 처음이지~?!</h1>
+                <h1>
+                    <div class="nickname">
+                        
+                    </div>
+                    님 어서오시궁~!
+                </h1>
+            </div>
+        </div>
+        <iframe id="iframe" src="./audio" allow="autoplay"></iframe>
+    </body>
+</html>
