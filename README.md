@@ -22,3 +22,8 @@ DB는 Firebase 리얼타임 데이터베이스를 사용하였습니다.
 보통 밤 12시 전후로 해서 방송 합니다 :>  
 놀러와주세영!  
 [https://www.twitch.tv/woohuihui20](https://www.twitch.tv/woohuihui20)
+
+## 트게더 디스코드 봇
+파이어베이스 Functions 기반으로 동작하는 트게더 디스코드 봇 코드입니다.  
+[https://gist.github.com/chooco13/b4ecc8195d5b0fd44110833fd03d425f](https://gist.github.com/chooco13/b4ecc8195d5b0fd44110833fd03d425f)  
+코드 참고하실 분은 참고하시라고 올려봅니다.
